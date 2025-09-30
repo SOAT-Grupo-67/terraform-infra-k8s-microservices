@@ -1,0 +1,37 @@
+name: Deploy terraform infrastructure
+on:
+  push:
+    branches:
+      - main
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_clipo_db_username: ${{ secrets.CLIPO_DB_USERNAME }}
+      TF_VAR_clipo_db_password: ${{ secrets.CLIPO_DB_PASSWORD }}
+      TF_VAR_users_db_username: ${{ secrets.USERS_DB_USERNAME }}
+      TF_VAR_users_db_password: ${{ secrets.USERS_DB_PASSWORD }}
+    defaults:
+      run:
+        working-directory: ./infra
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.SESSION_TOKEN }}
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Load providers and modules
+        run: terraform init
+
+      - name: Apply changes on the providers
+        run: terraform apply --auto-approve
