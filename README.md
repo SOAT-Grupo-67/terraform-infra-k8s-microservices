@@ -1,4 +1,4 @@
-# ☁️ Infraestrutura – Terraform + Kubernetes (Hack SOAT)
+# ☁️ Infraestrutura – Terraform + Kubernetes (Hack SOAT FIAP)
 
 Este repositório representa a **infraestrutura como código** do projeto **Sistema de Processamento de Vídeos – FIAP X**, desenvolvido como parte da disciplina de **Arquitetura de Software** no curso de pós-graduação da FIAP.
 
@@ -105,3 +105,4 @@ O repositório já está preparado para integração com ferramentas como:
 ## 👨‍💻 Autores
 
 Projeto desenvolvido pelo grupo SOAT 67 para o Hackaton - Pós-Graduação em Arquitetura de Software (FIAP).
+
